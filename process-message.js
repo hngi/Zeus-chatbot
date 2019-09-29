@@ -2,6 +2,8 @@
 
     const Dialogflow = require('dialogflow');
     const Pusher = require('pusher');
+    const getWeatherInfo = require('./weather');
+
 
     // You can find your project ID in your Dialogflow agent settings
     const projectId = 'talky-xeuyfj'; //https://dialogflow.com/docs/agents#settings
@@ -42,6 +44,19 @@
         .detectIntent(request)
         .then(responses => {
           const result = responses[0].queryResult;
+
+          // If the intent matches 'detect-city'
+          if (result.intent.displayName === 'detect-city') {
+            const city = result.parameters.fields['geo-city'].stringValue;
+
+            // fetch the temperature from openweather map
+            return getWeatherInfo(city).then(temperature => {
+              return pusher.trigger('bot', 'bot-response', {
+                message: `The weather is ${city} is ${temperature}°C`,
+              });
+            });
+          }
+          
           return pusher.trigger('bot', 'bot-response', {
             message: result.fulfillmentText,
           });
