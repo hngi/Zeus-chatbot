@@ -25,9 +25,7 @@
     "pusher": "^2.2.2",
     "reactstrap": "^8.0.1"
   },
-
   "engines": {
     "node": "12.10.0"
   }
-
 }
