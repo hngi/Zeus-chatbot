@@ -47,7 +47,7 @@ class Chat extends Component {
       conversation: [...this.state.conversation, msg],
     });
 
-    fetch('https://z-b.herokuapp.com/chat', {
+    fetch('https://z-bb.herokuapp.com/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
