@@ -12,21 +12,15 @@
 
     const app = express();
 
-    // Set up a whitelist and check against it:
-var whitelist = ['http://api.openweathermap.org']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
 
-    app.use(cors(corsOptions));
+    app.use(cors());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "X-Requested-With");
+      next();
+      });
 
 
     app.post('/chat', (req, res) => {
