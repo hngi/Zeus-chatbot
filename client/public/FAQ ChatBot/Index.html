@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="FAQ.css" />
+    <title>FAQ Page</title>
+  </head>
+  <header>
+    <dd><img src="zueslogo.png" alt="" /></dd>
+  </header>
+  <body>
+    <dd><p class="faq_header">Popular Issues</p></dd>
+    <dl class="faq">
+
+ </dd>
+      <dt>
+        <button aria-expanded="false" aria-controls="faq1_desc">
+          What is Zues ChatBot all about?
+        </button>
+      </dt>
+      <dd>
+        <p id="faq1_desc" class="desc">
+          Zues ChatBot interact with users that are registered members, it asks
+          users about personal information and use it to interact with the user,
+          this chat chatbot solely belongs to Team Zues of the HNG internship
+          programm.
+        </p>
+      </dd>
+
+      <dt>
+          <button aria-expanded="false" aria-controls="faq0_desc">
+            How do i start a conversation with Zues ChatBot?
+          </button>
+        </dt>
+        <dd>
+          <p id="faq0_desc" class="desc">
+            Zues ChatBot responds to English Language. Users can start a conversation with a Zues ChatBot typing a greeting into the chatbox area e.g Hello,Hi. The Chatbot will respond the message been sent.
+          </p>
+        </dd>
+      <dt>
+        <button aria-expanded="false" aria-controls="faq2_desc">
+          what language does Zues Chatbot Understands?
+        </button>
+      </dt>
+      <dd>
+        <p id="faq2_desc" class="desc">
+          Zues ChatBot understands understands basic American English as the
+          most accepted language in the world
+        </p>
+      </dd>
+      <dt>
+        <button aria-expanded="false" aria-controls="faq3_desc">
+          How secure are personal information?
+        </button>
+      </dt>
+      <dd>
+        <p id="faq3_desc" class="desc">
+          Your perosonal informations are safe with us as stipulated in the
+          <a href="">terms and conditons</a> Zues ChatBot does not share any
+          information provided by user to a 3rd party user or organisation.
+        </p>
+      </dd>
+      <dt>
+        <button aria-expanded="false" aria-controls="faq4_desc">
+          Is Zues ChatBot Free?
+        </button>
+      </dt>
+      <dd>
+        <p id="faq4_desc" class="desc">
+          Zues ChatBot is free, please disregard any mail requesting for
+          payments asZues ChatBot does not Require any form of payments.
+        </p>
+      </dd>
+    </dl>
+    <script>
+      /*
+  
+       *
+       *   File:   ButtonExpand.js
+       *
+       *   Desc:   Checkbox widget that implements ARIA Authoring Practices
+       *           for a menu of links
+       */
+
+      /*
+       *   @constructor ButtonExpand
+       *
+       *
+       */
+      var ButtonExpand = function(domNode) {
+        this.domNode = domNode;
+
+        this.keyCode = Object.freeze({
+          RETURN: 13
+        });
+      };
+
+      ButtonExpand.prototype.init = function() {
+        this.controlledNode = false;
+
+        var id = this.domNode.getAttribute("aria-controls");
+
+        if (id) {
+          this.controlledNode = document.getElementById(id);
+        }
+
+        this.domNode.setAttribute("aria-expanded", "false");
+        this.hideContent();
+
+        this.domNode.addEventListener("keydown", this.handleKeydown.bind(this));
+        this.domNode.addEventListener("click", this.handleClick.bind(this));
+        this.domNode.addEventListener("focus", this.handleFocus.bind(this));
+        this.domNode.addEventListener("blur", this.handleBlur.bind(this));
+      };
+
+      ButtonExpand.prototype.showContent = function() {
+        if (this.controlledNode) {
+          this.controlledNode.style.display = "block";
+        }
+      };
+
+      ButtonExpand.prototype.hideContent = function() {
+        if (this.controlledNode) {
+          this.controlledNode.style.display = "none";
+        }
+      };
+
+      ButtonExpand.prototype.toggleExpand = function() {
+        if (this.domNode.getAttribute("aria-expanded") === "true") {
+          this.domNode.setAttribute("aria-expanded", "false");
+          this.hideContent();
+        } else {
+          this.domNode.setAttribute("aria-expanded", "true");
+          this.showContent();
+        }
+      };
+
+      /* EVENT HANDLERS */
+
+      ButtonExpand.prototype.handleKeydown = function(event) {
+        console.log("[keydown]");
+
+        switch (event.keyCode) {
+          case this.keyCode.RETURN:
+            this.toggleExpand();
+
+            event.stopPropagation();
+            event.preventDefault();
+            break;
+
+          default:
+            break;
+        }
+      };
+
+      ButtonExpand.prototype.handleClick = function(event) {
+        this.toggleExpand();
+      };
+
+      ButtonExpand.prototype.handleFocus = function(event) {
+        this.domNode.classList.add("focus");
+      };
+
+      ButtonExpand.prototype.handleBlur = function(event) {
+        this.domNode.classList.remove("focus");
+      };
+
+      /* Initialize Hide/Show Buttons */
+
+      window.addEventListener(
+        "load",
+        function(event) {
+          var buttons = document.querySelectorAll(
+            "button[aria-expanded][aria-controls]"
+          );
+
+          for (var i = 0; i < buttons.length; i++) {
+            var be = new ButtonExpand(buttons[i]);
+            be.init();
+          }
+        },
+        false
+      );
+    </script>
+  </body>
+</html>
